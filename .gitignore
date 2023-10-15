@@ -2,6 +2,13 @@
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
 # User-specific stuff
+.idea/
+./oolab/.idea/
+oolab/build/
+oolab/.gradle
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
@@ -26,7 +33,9 @@
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
-
+gradlew.bat
+gradlew
+gradle/
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
 # since they will be recreated, and may cause churn.  Uncomment if using
