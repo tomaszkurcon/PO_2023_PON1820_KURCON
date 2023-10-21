@@ -1,8 +1,5 @@
 package agh.ics.oop;
-
-import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
 
 public class World {
     public static void main(String[] args) {
@@ -25,11 +22,10 @@ public class World {
                 case BACKWARD -> "zwierzak idzie do tyłu";
                 case RIGHT -> "zwierzak skręca w prawo";
                 case LEFT -> "zwierzak skręca w lewo";
-                default -> null;
             };
-            if (message != null) {
-                System.out.println(message);
-            }
+
+            System.out.println(message);
+
         }
     }
 }
