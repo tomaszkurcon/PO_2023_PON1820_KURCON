@@ -4,11 +4,12 @@ import agh.ics.oop.model.MoveDirection;
 
 
 import java.util.LinkedList;
+import java.util.List;
 
 
 public class OptionsParser {
-    public static MoveDirection[] parse(String[] args) {
-        LinkedList<MoveDirection> list = new LinkedList<MoveDirection>();
+    public static List<MoveDirection> parse(String[] args) {
+        List<MoveDirection> list = new LinkedList<MoveDirection>();
         for (String arg : args) {
             MoveDirection move = switch (arg) {
                 case "f" -> MoveDirection.FORWARD;
@@ -23,7 +24,6 @@ public class OptionsParser {
             }
 
         }
-
-        return list.toArray(new MoveDirection[0]);
+        return list;
     }
 }
