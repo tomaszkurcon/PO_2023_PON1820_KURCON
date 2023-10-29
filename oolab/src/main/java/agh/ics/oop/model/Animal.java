@@ -16,11 +16,19 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Position: (%d, %d), Orientation: %s ".formatted(position.getX(), position.getY(), animalOrientation.toString());
+        return "Position: (%d, %d), Orientation: %s".formatted(position.getX(), position.getY(), animalOrientation.toString());
     }
 
     public boolean isAt(Vector2d position) {
         return position.equals(this.position);
+    }
+
+    public MapDirection getAnimalOrientation() {
+        return animalOrientation;
+    }
+
+    public Vector2d getPosition() {
+        return position;
     }
 
     public void move(MoveDirection direction) {
@@ -41,8 +49,9 @@ public class Animal {
 
         }
     }
+
     private void moveIfIsInMap(Vector2d position) {
-        if(position.precedes(new Vector2d(4,4)) && position.follows(new Vector2d(0,0))) {
+        if (position.precedes(new Vector2d(4, 4)) && position.follows(new Vector2d(0, 0))) {
             this.position = position;
         }
     }
