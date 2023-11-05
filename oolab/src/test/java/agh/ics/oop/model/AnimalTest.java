@@ -7,10 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class AnimalTest {
     Animal myAnimal = new Animal(new Vector2d(2,2));
     Animal myAnimal2 = new Animal();
+    WorldMap map = new RectangularMap(4,4);
 
     @Test
     void testToString() {
-        assertEquals("Position: (2, 2), Orientation: Północ", myAnimal2.toString());
+        assertEquals("N", myAnimal2.toString());
     }
 
     @Test
@@ -28,14 +29,14 @@ class AnimalTest {
         };
         Vector2d finalPosition = new Vector2d(0,4);
         for(MoveDirection move: moves) {
-            myAnimal.move(move);
+            myAnimal.move(move, map);
         }
         assertEquals(finalPosition, myAnimal.getPosition());
         assertEquals(MapDirection.SOUTH, myAnimal.getAnimalOrientation());
-        myAnimal.move(MoveDirection.BACKWARD);
+        myAnimal.move(MoveDirection.BACKWARD, map);
         assertEquals(finalPosition, myAnimal.getPosition());
-        myAnimal.move(MoveDirection.RIGHT);
-        myAnimal.move(MoveDirection.FORWARD);
+        myAnimal.move(MoveDirection.RIGHT, map);
+        myAnimal.move(MoveDirection.FORWARD, map);
         assertEquals(finalPosition, myAnimal.getPosition());
 
     }

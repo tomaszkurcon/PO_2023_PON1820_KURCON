@@ -16,7 +16,7 @@ public class Animal {
 
     @Override
     public String toString() {
-        return "Position: (%d, %d), Orientation: %s".formatted(position.getX(), position.getY(), animalOrientation.toString());
+        return "%s".formatted(animalOrientation.toString());
     }
 
     public boolean isAt(Vector2d position) {
@@ -31,7 +31,7 @@ public class Animal {
         return position;
     }
 
-    public void move(MoveDirection direction) {
+    public void move(MoveDirection direction, MoveValidator moveValidator) {
 
         switch (direction) {
             case RIGHT:
@@ -41,19 +41,20 @@ public class Animal {
                 this.animalOrientation = animalOrientation.previous();
                 break;
             case FORWARD:
-                moveIfIsInMap(this.position.add(animalOrientation.toUnitVector()));
+                Vector2d destination1 = this.position.add(animalOrientation.toUnitVector());
+                if (moveValidator.canMoveTo(destination1)) {
+                    this.position = destination1;
+                }
                 break;
             case BACKWARD:
-                moveIfIsInMap(this.position.substract(animalOrientation.toUnitVector()));
+                Vector2d destination2 = this.position.substract(animalOrientation.toUnitVector());
+                if (moveValidator.canMoveTo(destination2)) {
+                    this.position = destination2;
+                }
                 break;
 
         }
     }
 
-    private void moveIfIsInMap(Vector2d position) {
-        if (position.precedes(new Vector2d(4, 4)) && position.follows(new Vector2d(0, 0))) {
-            this.position = position;
-        }
-    }
 
 }
