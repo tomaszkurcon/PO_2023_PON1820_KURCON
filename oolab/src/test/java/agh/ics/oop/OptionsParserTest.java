@@ -11,13 +11,15 @@ import static org.junit.jupiter.api.Assertions.*;
 class OptionsParserTest {
 
     @Test
-    void parse() {
-        String[] args1 = {"f", "l", "r", "b"};
-        String[] args2 = {"bbbb", "test", "r", "ff"};
-        List<MoveDirection> parsedArgs1 = new LinkedList<MoveDirection>(List.of(MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT,
+    void parse1() {
+        String[] args = {"f", "l", "r", "b"};
+        List<MoveDirection> parsedArgs = new LinkedList<MoveDirection>(List.of(MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT,
                 MoveDirection.BACKWARD));
-        List<MoveDirection> parsedArgs2 = new LinkedList<MoveDirection>(List.of(MoveDirection.RIGHT));
-        assertEquals(parsedArgs1, OptionsParser.parse(args1));
-        assertEquals(parsedArgs2, OptionsParser.parse(args2));
+        assertEquals(parsedArgs, OptionsParser.parse(args));
+    }
+    void parse2() {
+        String[] args = {"bbbb", "test", "r", "ff"};
+        List<MoveDirection> parsedArgs = new LinkedList<MoveDirection>(List.of(MoveDirection.RIGHT));
+        assertEquals(parsedArgs, OptionsParser.parse(args));
     }
 }
