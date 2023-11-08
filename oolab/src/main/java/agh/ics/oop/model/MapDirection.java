@@ -35,27 +35,12 @@ public enum MapDirection {
     }
 
     public Vector2d toUnitVector() {
-        int[] values = new int[2];
-        switch (this) {
-            case NORTH:
-                values[0] = 0;
-                values[1] = 1;
-                break;
-            case EAST:
-                values[0] = 1;
-                values[1] = 0;
-                break;
-            case WEST:
-                values[0] = -1;
-                values[1] = 0;
-                break;
-            case SOUTH:
-                values[0] = 0;
-                values[1] = -1;
-                break;
-        }
-        ;
-        return new Vector2d(values[0], values[1]);
+      return switch (this) {
+            case NORTH->new Vector2d(0,1);
+            case EAST->new Vector2d(1,0);
+            case WEST->new Vector2d(-1,0);
+            case SOUTH->new Vector2d(0,-1);
+        };
     }
 
 }
