@@ -9,14 +9,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Simulation {
-    private List<Animal> listOfAnimals = new LinkedList<>();
+    private final List<Animal> listOfAnimals = new LinkedList<>();
     private final List<MoveDirection> moves;
     
     public Simulation(List<MoveDirection> moves, List<Vector2d> initPositions) {
         for(Vector2d position : initPositions) {
             listOfAnimals.add(new Animal(position));
         }
-        this.moves = moves;
+        this.moves = new LinkedList<>(moves);
     }
 
     public List<Animal> getListOfAnimals() {
