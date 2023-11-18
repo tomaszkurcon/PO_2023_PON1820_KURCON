@@ -14,7 +14,7 @@ public class Simulation {
     private final List<MoveDirection> moves;
     private final WorldMap map;
     public Simulation(List<MoveDirection> moves, List<Vector2d> initPositions, WorldMap map) {
-        this.moves = moves;
+        this.moves = new LinkedList<>(moves);
         this.map = map;
         for(Vector2d position : initPositions) {
             Animal newAnimal = new Animal(position);

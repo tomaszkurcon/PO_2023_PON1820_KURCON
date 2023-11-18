@@ -4,14 +4,13 @@ public class Animal {
     private MapDirection animalOrientation;
     private Vector2d position;
 
-    public Animal() {
-        this.position = new Vector2d(2, 2);
-        this.animalOrientation = MapDirection.NORTH;
-    }
 
     public Animal(Vector2d location) {
         this.position = location;
         this.animalOrientation = MapDirection.NORTH;
+    }
+    public Animal() {
+        this(new Vector2d(2, 2));
     }
 
     @Override
