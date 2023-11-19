@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,7 +17,7 @@ class SimulationTest {
 
 
     @Test
-    void runConfig1() {
+    void rectangularMapRunConfig1() {
         String[] simulationConfig1 = {"f", "l", "r", "f", "f", "l"};
         WorldMap map1 = new RectangularMap(4,5);
         Simulation simulation1 = new Simulation(OptionsParser.parse(simulationConfig1),
@@ -33,7 +34,7 @@ class SimulationTest {
 
     }
     @Test
-    void runConfig2() {
+    void rectangularMapRunConfig2() {
         String[] simulationConfig2 = {"l", "f", "f", "f","bad", "l", "f", "r","t", "f","r", "b", "f"};
         WorldMap map2 = new RectangularMap(4,4);
         Simulation simulation2 = new Simulation(OptionsParser.parse(simulationConfig2),
@@ -49,5 +50,24 @@ class SimulationTest {
         assertEquals(new Vector2d(0,0), animalList2.get(0).getPosition());
         assertEquals(new Vector2d(3,4), animalList2.get(1).getPosition());
         assertEquals(new Vector2d(2,4), animalList2.get(2).getPosition());
+    }
+
+    @Test
+    void grassFieldRunConfig1() {
+        String[] simulationConfig1 = {"f", "l", "f", "f","l", "f", "f", "r","f", "f","l", "f", "f","f","f","f","f"};
+        WorldMap map1 = new GrassField(20);
+        Simulation simulation = new Simulation(OptionsParser.parse(simulationConfig1),
+                new LinkedList<>(List.of(position1, position2)), map1);
+        List<Animal> animalList1 = simulation.getListOfAnimals();
+
+        simulation.run();
+
+        assertEquals(MapDirection.SOUTH, animalList1.get(0).getAnimalOrientation());
+        assertEquals(MapDirection.NORTH, animalList1.get(1).getAnimalOrientation());
+
+
+        assertEquals(new Vector2d(-2,-1), animalList1.get(0).getPosition());
+        assertEquals(new Vector2d(2,8), animalList1.get(1).getPosition());
+
     }
 }
