@@ -8,36 +8,35 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractWorldMap implements WorldMap {
-    private final Map<Vector2d, Animal> animals = new HashMap<>();
+    private final Map<Vector2d, MoveableWorldElement> moveableWorldElements = new HashMap<>();
     private final MapVisualizer mapVisualizer = new MapVisualizer(this);
-    public Map<Vector2d, Animal> getAnimals() {
-        return animals;
+    public Map<Vector2d, MoveableWorldElement> getMoveableElements() {
+        return moveableWorldElements;
     }
 
 
     @Override
-    public boolean place(Animal animal) {
-        if (canMoveTo(animal.getPosition())) {
-            animals.put(animal.getPosition(), animal);
+    public boolean place(MoveableWorldElement element) {
+        if (canMoveTo(element.getPosition())) {
+            moveableWorldElements.put(element.getPosition(), element);
             return true;
         }
         return false;
     }
-
     @Override
-    public void move(Animal animal, MoveDirection direction) {
-        Vector2d animalPosition = animal.getPosition();
-        animal.move(direction, this);
-        animals.remove(animalPosition);
-        animals.put(animal.getPosition(), animal);
+    public void move(MoveableWorldElement worldElement, MoveDirection direction) {
+        Vector2d animalPosition = worldElement.getPosition();
+        worldElement.move(direction, this);
+        moveableWorldElements.remove(animalPosition);
+        moveableWorldElements.put(worldElement.getPosition(), worldElement);
     }
     @Override
     public boolean isOccupied(Vector2d position) {
-        return animals.get(position)!=null;
+        return objectAt(position)!=null;
     }
     @Override
     public WorldElement objectAt(Vector2d position) {
-        return animals.get(position);
+        return moveableWorldElements.get(position);
     }
     @Override
     public boolean canMoveTo(Vector2d position) {
@@ -50,6 +49,6 @@ public abstract class AbstractWorldMap implements WorldMap {
 
     @Override
     public List<WorldElement> getElements() {
-        return new ArrayList<>(animals.values());
+        return new ArrayList<>(moveableWorldElements.values());
     }
 }

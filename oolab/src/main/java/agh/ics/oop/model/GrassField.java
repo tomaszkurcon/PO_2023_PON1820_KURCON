@@ -9,12 +9,10 @@ import java.util.Map;
 
 
 public class GrassField extends AbstractWorldMap {
-    private final int amountOfGrassFields;
     private final Map<Vector2d, Grass> grass = new HashMap<>();
 
 
     public GrassField(int amountOfGrassFields) {
-        this.amountOfGrassFields = amountOfGrassFields;
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator((int) Math.sqrt(amountOfGrassFields * 10), (int) Math.sqrt(amountOfGrassFields * 10), amountOfGrassFields);
         for(Vector2d grassPosition : randomPositionGenerator) {
             grass.put(grassPosition, new Grass(grassPosition));
@@ -22,19 +20,13 @@ public class GrassField extends AbstractWorldMap {
     }
 
     @Override
-    public boolean isOccupied(Vector2d position) {
-        return objectAt(position) != null;
-    }
-
-    @Override
     public WorldElement objectAt(Vector2d position) {
-        if (super.isOccupied(position)) {
+        if (super.objectAt(position)!=null) {
             return super.objectAt(position);
         } else {
             return grass.get(position);
         }
     }
-
     private Vector2d[] calculateMapCorners(Map<Vector2d, WorldElement> map) {
         int xMax = Integer.MIN_VALUE, xMin = Integer.MAX_VALUE, yMax = Integer.MIN_VALUE, yMin = Integer.MAX_VALUE;
         for (Vector2d position : map.keySet()) {
@@ -50,7 +42,7 @@ public class GrassField extends AbstractWorldMap {
 
     @Override
     public String toString() {
-        Vector2d[] animalsMapCorners = calculateMapCorners(new HashMap<>(super.getAnimals()));
+        Vector2d[] animalsMapCorners = calculateMapCorners(new HashMap<>(super.getMoveableElements()));
         Vector2d[] grassMapCorners = calculateMapCorners(new HashMap<>(grass));
         return super.toString(animalsMapCorners[0].lowerLeft(grassMapCorners[0]), animalsMapCorners[1].upperRight(grassMapCorners[1]));
     }
