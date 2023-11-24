@@ -1,6 +1,6 @@
 package agh.ics.oop.model;
 
-public class Animal {
+public class Animal implements MoveableWorldElement {
     private MapDirection animalOrientation;
     private Vector2d position;
 
