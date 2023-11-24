@@ -1,12 +1,11 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MapDirection;
-import agh.ics.oop.model.Vector2d;
+import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
 import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,11 +14,13 @@ class SimulationTest {
     Vector2d position2 = new Vector2d(4, 4);
     Vector2d position3 = new Vector2d(2, 2);
 
+
     @Test
     void runConfig1() {
         String[] simulationConfig1 = {"f", "l", "r", "f", "f", "l"};
+        WorldMap map1 = new RectangularMap(4,5);
         Simulation simulation1 = new Simulation(OptionsParser.parse(simulationConfig1),
-                new LinkedList<>(List.of(position1, position2)));
+                new LinkedList<>(List.of(position1, position2)), map1);
         List<Animal> animalList1 = simulation1.getListOfAnimals();
 
         simulation1.run();
@@ -33,9 +34,10 @@ class SimulationTest {
     }
     @Test
     void runConfig2() {
-        String[] simulationConfig2 = {"l", "f", "f", "f","bad", "l", "f", "r","t", "b","r", "b"};
+        String[] simulationConfig2 = {"l", "f", "f", "f","bad", "l", "f", "r","t", "f","r", "b", "f"};
+        WorldMap map2 = new RectangularMap(4,4);
         Simulation simulation2 = new Simulation(OptionsParser.parse(simulationConfig2),
-                new LinkedList<>(List.of(position1, position2, position3)));
+                new LinkedList<>(List.of(position1, position2, position3)), map2);
         List<Animal> animalList2 = simulation2.getListOfAnimals();
 
         simulation2.run();
@@ -45,8 +47,7 @@ class SimulationTest {
         assertEquals(MapDirection.EAST, animalList2.get(2).getAnimalOrientation());
 
         assertEquals(new Vector2d(0,0), animalList2.get(0).getPosition());
-        assertEquals(new Vector2d(4,4), animalList2.get(1).getPosition());
+        assertEquals(new Vector2d(3,4), animalList2.get(1).getPosition());
         assertEquals(new Vector2d(2,4), animalList2.get(2).getPosition());
-
     }
 }
