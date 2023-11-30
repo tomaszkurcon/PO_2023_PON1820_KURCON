@@ -58,6 +58,10 @@ public class Animal implements MoveableWorldElement {
 
         }
     }
+    @Override
+    public boolean isMoveable() {
+        return true;
+    }
 
 
 }
