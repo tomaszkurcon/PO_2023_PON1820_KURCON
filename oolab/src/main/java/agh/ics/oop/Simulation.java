@@ -4,6 +4,7 @@ import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
 import agh.ics.oop.model.WorldMap;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -18,12 +19,14 @@ public class Simulation {
         this.map = map;
         for(Vector2d position : initPositions) {
             Animal newAnimal = new Animal(position);
-            if(map.place(newAnimal)) {
+            try{
+                map.place(newAnimal);
                 listOfAnimals.add(newAnimal);
+                map.mapChanged("Zwierzak został ustawiony na pozycji: " + position);
+            } catch(PositionAlreadyOccupiedException ex) {
+                map.mapChanged("Nie udało się postawić zwierzaka na pozycji: " + position);
             }
         }
-
-
     }
 
     public List<Animal> getListOfAnimals() {
@@ -31,13 +34,10 @@ public class Simulation {
     }
 
     public void run() {
-        //Stan początkowy mapy
-        System.out.println(map);
         for(int i=0; i<moves.size(); i++) {
             int animalIndex = i%listOfAnimals.size();
+            System.out.println("Zwierzę nr: " + animalIndex);
             map.move(listOfAnimals.get(animalIndex), moves.get(i));
-            System.out.println("Zwierzę %d : ".formatted(animalIndex) + listOfAnimals.get(animalIndex).getPosition());
-            System.out.println(map);
         }
     }
 }

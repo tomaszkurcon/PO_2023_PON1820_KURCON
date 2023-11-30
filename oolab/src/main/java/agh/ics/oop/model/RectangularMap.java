@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.Boundary;
+
 public class RectangularMap extends AbstractWorldMap {
     private final Vector2d rightUpperCorner;
     private final Vector2d leftBottomCorner;
@@ -14,8 +16,9 @@ public class RectangularMap extends AbstractWorldMap {
         boolean isInMap = position.precedes(rightUpperCorner) && position.follows(leftBottomCorner);
         return super.canMoveTo(position) && isInMap;
     }
+
     @Override
-    public String toString() {
-        return super.toString(leftBottomCorner,rightUpperCorner);
+    public Boundary getCurrentBounds() {
+        return new Boundary(leftBottomCorner, rightUpperCorner);
     }
 }

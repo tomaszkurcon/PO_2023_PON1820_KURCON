@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
+
 public class Animal implements MoveableWorldElement {
     private MapDirection animalOrientation;
     private Vector2d position;
@@ -30,8 +32,8 @@ public class Animal implements MoveableWorldElement {
         return position;
     }
 
-    public void move(MoveDirection direction, MoveValidator moveValidator) {
-
+    @Override
+    public void move(MoveDirection direction, MoveValidator moveValidator) throws PositionAlreadyOccupiedException {
         switch (direction) {
             case RIGHT:
                 this.animalOrientation = animalOrientation.next();
@@ -49,6 +51,8 @@ public class Animal implements MoveableWorldElement {
                 Vector2d destination2 = this.position.substract(animalOrientation.toUnitVector());
                 if (moveValidator.canMoveTo(destination2)) {
                     this.position = destination2;
+                } else {
+                    throw new PositionAlreadyOccupiedException(destination2);
                 }
                 break;
 

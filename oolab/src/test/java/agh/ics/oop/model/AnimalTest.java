@@ -1,5 +1,6 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,14 +30,28 @@ class AnimalTest {
         };
         Vector2d finalPosition = new Vector2d(0,4);
         for(MoveDirection move: moves) {
-            myAnimal.move(move, map);
+            try{
+                myAnimal.move(move, map);
+            } catch(PositionAlreadyOccupiedException er) {}
+
+
+
         }
         assertEquals(finalPosition, myAnimal.getPosition());
         assertEquals(MapDirection.SOUTH, myAnimal.getAnimalOrientation());
-        myAnimal.move(MoveDirection.BACKWARD, map);
+        try{
+            myAnimal.move(MoveDirection.BACKWARD, map);
+        } catch(PositionAlreadyOccupiedException er) {}
+
         assertEquals(finalPosition, myAnimal.getPosition());
-        myAnimal.move(MoveDirection.RIGHT, map);
-        myAnimal.move(MoveDirection.FORWARD, map);
+        try{
+            myAnimal.move(MoveDirection.RIGHT, map);
+        } catch(PositionAlreadyOccupiedException er) {}
+        try{
+            myAnimal.move(MoveDirection.FORWARD, map);
+        } catch(PositionAlreadyOccupiedException er) {}
+
+
         assertEquals(finalPosition, myAnimal.getPosition());
 
     }
