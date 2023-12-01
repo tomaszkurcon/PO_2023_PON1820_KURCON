@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AnimalTest {
     Animal myAnimal = new Animal(new Vector2d(2,2));
     Animal myAnimal2 = new Animal();
-    WorldMap map = new RectangularMap(4,4);
+    WorldMap map = new RectangularMap(4,4, "RectangularMap");
 
     @Test
     void testToString() {

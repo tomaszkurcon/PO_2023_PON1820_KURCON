@@ -1,20 +1,36 @@
 package agh.ics.oop;
 import agh.ics.oop.model.*;
+
+import java.time.Duration;
+import java.time.Instant;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class World {
     public static void main(String[] args) {
         System.out.println("System wystartował");
-        ConsoleMapDisplay mapObserver = new ConsoleMapDisplay();
+        Instant start = Instant.now();
         List<MoveDirection> directions = OptionsParser.parse(args);
         List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(2,3));
-//        WorldMap map = new RectangularMap(3,5);
-        WorldMap grassMap = new GrassField(10);
-        grassMap.addSubscriber(mapObserver);
-        Simulation simulation = new Simulation(directions, positions,  grassMap);
-        simulation.run();
+        ConsoleMapDisplay mapObserver = new ConsoleMapDisplay();
+        List<Simulation> simulations = new LinkedList<>();
+        for(int i=0; i<10000; i++) {
+            WorldMap rectangularMap = new RectangularMap(3,5, "RectangularMap" + i);
+            WorldMap grassMap = new GrassField(10, "Grassfield" + i);
+            rectangularMap.addSubscriber(mapObserver);
+            grassMap.addSubscriber(mapObserver);
+            Simulation rectangularMapSimulation = new Simulation(directions, positions,  rectangularMap);
+            Simulation grassMapSimulation = new Simulation(directions, positions,  grassMap);
+            simulations.add(rectangularMapSimulation);
+            simulations.add(grassMapSimulation);
+        }
+
+        SimulationEngine simulationEngine = new SimulationEngine(simulations);
+        simulationEngine.runSync();
 //        run(OptionsParser.parse(args));
+        Instant end = Instant.now();
+        System.out.println(Duration.between(start,end).toMillis());
         System.out.println("System zakończył działanie");
     }
 

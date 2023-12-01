@@ -1,16 +1,13 @@
 package agh.ics.oop;
 
-import agh.ics.oop.model.Animal;
-import agh.ics.oop.model.MoveDirection;
-import agh.ics.oop.model.Vector2d;
-import agh.ics.oop.model.WorldMap;
+import agh.ics.oop.model.*;
 import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Simulation {
+public class Simulation implements Runnable {
     private final List<Animal> listOfAnimals = new LinkedList<>();
     private final List<MoveDirection> moves;
     private final WorldMap map;

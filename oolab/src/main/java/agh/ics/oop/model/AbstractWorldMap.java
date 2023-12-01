@@ -4,15 +4,13 @@ import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import agh.ics.oop.model.util.Boundary;
 import agh.ics.oop.model.util.MapVisualizer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractWorldMap implements WorldMap {
     private final Map<Vector2d, MoveableWorldElement> moveableWorldElements = new HashMap<>();
     private final MapVisualizer mapVisualizer = new MapVisualizer(this);
     private final List<MapChangeListener>  listOfListeners = new ArrayList<>();
+    protected String id;
     public Map<Vector2d, MoveableWorldElement> getMoveableElements() {
         return moveableWorldElements;
     }
@@ -94,5 +92,10 @@ public abstract class AbstractWorldMap implements WorldMap {
         for(MapChangeListener listener : listOfListeners) {
             listener.mapChanged(this, message);
         }
+    }
+
+    @Override
+    public String getId() {
+        return id;
     }
 }
