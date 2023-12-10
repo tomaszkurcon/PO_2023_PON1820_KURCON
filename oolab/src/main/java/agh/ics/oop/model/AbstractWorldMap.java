@@ -36,9 +36,9 @@ public abstract class AbstractWorldMap implements WorldMap {
             worldElement.move(direction, this);
             moveableWorldElements.remove(animalPosition);
             moveableWorldElements.put(worldElement.getPosition(), worldElement);
-            mapChanged("Zwierzak poruszył się z pozycji: " + animalPosition + " na pozycję: " + worldElement.getPosition());
+            mapChanged("Zwierzak poruszyl sie z pozycji: " + animalPosition + " na pozycje: " + worldElement.getPosition());
         } catch(PositionAlreadyOccupiedException er) {
-            mapChanged("Zwierzak nie mógł poruszyć się na wskazane pole");
+            mapChanged("Zwierzak nie mogl poruszyc się na wskazane pole");
         }
 
     }
