@@ -28,10 +28,11 @@ public class SimulationEngine {
             simulationTasks.add(simulationTask);
             simulationTask.start();
         }
-        try {
-            awaitSimulationsEnd();
-        } catch (InterruptedException err) {
-        }
+        //App waits for simulations to be ended and then update GUI, how to fix it?
+//        try {
+//            awaitSimulationsEnd();
+//        } catch (InterruptedException err) {
+//        }
 
     }
 
