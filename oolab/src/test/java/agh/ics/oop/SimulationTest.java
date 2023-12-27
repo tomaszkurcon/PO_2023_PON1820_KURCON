@@ -20,7 +20,7 @@ class SimulationTest {
     @Test
     void rectangularMapRunConfig1() {
         String[] simulationConfig1 = {"f", "l", "r", "f", "f", "l"};
-        WorldMap map1 = new RectangularMap(4,5);
+        WorldMap map1 = new RectangularMap(4,5, "RectangularMap");
         Simulation simulation1 = new Simulation(OptionsParser.parse(simulationConfig1),
                 new LinkedList<>(List.of(position1, position2, position2)), map1);
         List<Animal> animalList1 = simulation1.getListOfAnimals();
@@ -39,7 +39,7 @@ class SimulationTest {
     @Test
     void grassFieldRunConfig1() {
         String[] simulationConfig1 = {"f", "l", "f", "f","l", "f", "f", "r","f", "f","l", "f", "f","f","f","f","f"};
-        WorldMap map1 = new GrassField(20);
+        WorldMap map1 = new GrassField(20, "GrassField");
         Simulation simulation = new Simulation(OptionsParser.parse(simulationConfig1),
                 new LinkedList<>(List.of(position1, position2)), map1);
         List<Animal> animalList1 = simulation.getListOfAnimals();

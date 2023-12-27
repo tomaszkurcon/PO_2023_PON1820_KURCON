@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GrassFieldTest {
 
-    GrassField map = new GrassField(10);
+    GrassField map = new GrassField(10, "Grassfield");
     Animal animal = new Animal(new Vector2d(2,2));
 
 
@@ -50,7 +50,7 @@ class GrassFieldTest {
 
     @Test
     void calculateMapCorners() {
-        GrassField map = new GrassField(10);
+        GrassField map = new GrassField(10, "Grassfield2");
         Animal rightUpperAnimal = new Animal(new Vector2d(11, 11));
         Animal leftBottomAnimal = new Animal(new Vector2d(-1,-1));
         try{
