@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.MoveDirection;
+import agh.ics.oop.model.exceptions.PositionAlreadyOccupiedException;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -17,9 +18,11 @@ class OptionsParserTest {
                 MoveDirection.BACKWARD));
         assertEquals(parsedArgs, OptionsParser.parse(args));
     }
+    @Test
     void parse2() {
         String[] args = {"bbbb", "test", "r", "ff"};
-        List<MoveDirection> parsedArgs = new LinkedList<MoveDirection>(List.of(MoveDirection.RIGHT));
-        assertEquals(parsedArgs, OptionsParser.parse(args));
+        assertThrows(IllegalArgumentException.class,() -> {
+            OptionsParser.parse(args);
+        });
     }
 }

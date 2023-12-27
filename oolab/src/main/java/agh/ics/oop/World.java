@@ -6,11 +6,13 @@ import java.util.List;
 public class World {
     public static void main(String[] args) {
         System.out.println("System wystartował");
+        ConsoleMapDisplay mapObserver = new ConsoleMapDisplay();
         List<MoveDirection> directions = OptionsParser.parse(args);
-        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,5));
-        WorldMap map = new RectangularMap(3,5);
+        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(2,3));
+//        WorldMap map = new RectangularMap(3,5);
         WorldMap grassMap = new GrassField(10);
-        Simulation simulation = new Simulation(directions, positions, grassMap);
+        grassMap.addSubscriber(mapObserver);
+        Simulation simulation = new Simulation(directions, positions,  grassMap);
         simulation.run();
 //        run(OptionsParser.parse(args));
         System.out.println("System zakończył działanie");
